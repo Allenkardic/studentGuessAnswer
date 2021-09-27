@@ -178,7 +178,7 @@ code {
 .dashContainer {
   background-color: var(--color-blue-special);
   border-radius: var(--borderRadius-small);
-  width: 300px;
+  width: 340px;
   margin-right: auto;
   margin-left: auto;
   color: var(--color-white-dark);

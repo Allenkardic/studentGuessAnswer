@@ -1,6 +1,7 @@
 import React from "react";
 import "../index.css";
 import { useHistory, Link } from "react-router-dom";
+import axios from "axios";
 
 function Home() {
   const id = "emma";
@@ -16,11 +17,41 @@ function Home() {
     if (value.length < 3) {
       alert("Enter user name to continue");
     } else {
-      history.push(`/attempt/${value}`);
+      // axios({
+      //   method: "get",
+      //   url: "https://question-ranking.herokuapp.com/attempts",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      // })
+      //   .then(function (response) {
+      //     console.log(response);
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error);
+      //   });
+
+      axios({
+        method: "post",
+        url: "https://question-ranking.herokuapp.com/start",
+        data: {
+          username: value,
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then(function (response) {
+          console.log(response.data.id);
+          const { id } = response.data;
+          history.push(`/attempt/${id}`);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
   };
 
-  console.log(value, "here");
   return (
     <div>
       <div className='titleText'>Welcome to Guess MiMI</div>
